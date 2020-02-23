@@ -6,7 +6,7 @@ import colorama
 from colorama import Fore, Back, Style
 colorama.init()
 
-try
+try:
 	now = datetime.datetime.now()
 	c = calendar.TextCalendar(calendar.MONDAY)
 	n = ''
