@@ -1,57 +1,63 @@
+#Import standart modules
 import datetime
 import calendar
 import sys
 import os
+
+#prepare to work with the colors of unix console
 import colorama
 from colorama import Fore, Back, Style
 colorama.init()
 
+# main program
 try:
 	now = datetime.datetime.now()
-	c = calendar.TextCalendar(calendar.MONDAY)
+	c = calendar.TextCalendar(calendar.MONDAY) #Set first day as Mond
 	n = ''
 	switch = True
 
-
-
+#Fantion of starting Program
 	def run():
 		startCalendar()
 
-
+#Fantion of starting Calendar
 	def startCalendar():
 		switch = True
-		start = int(input(Fore.CYAN + 'Наберите \"1\" Чтобы использовать Календарь.\n \"2\" - для выхода из программы: '))
+		start = int(input(Fore.CYAN + 'Type \" 1\" To use the Calendar.\n \ " 2\" - to exit the program:'))
 		if (start < 1 or start > 2):
 			run()
 		elif (start == 2):
-			print(Fore.RED + 'До свидания!')
+			print(Fore.RED + 'Goodbye!')
 			switch = False
 		elif (start == 1):
 			os.system('clear')
 			calendarick()			
 
-			
+
+#Main cycle of Calendar					
 	def calendarick():
 				
-		h = int(input('Введите год, начиная с нулевого Н.Э.: '))
-		n = int(input('Введите номер месяца: '))
+		h = int(input('Enter the year starting from zero N. E.:'))
+		n = int(input('Enter the month number:'))
 		if ((h < 0) and (n < 0 or n > 12)):
-			print(Fore.RED + 'В программе год должен начинаться с нулевого Нашей Эры!')
+			print(Fore.RED + 'In the program, the year should start from zero Ad!')
 			run()
 		else:	
 			month = c.formatmonth(h, n)
-			print(Fore.MAGENTA + 'Текущее время: ')
+			print(Fore.MAGENTA + 'Current time: \n')
 			print()
 			print(now.strftime(Fore.GREEN + "%d-%m-%Y"))
 			print()
 			print(Fore.YELLOW + month)
 				
-			print(Fore.CYAN + 'Желаете посмотреть другой год и месяц?')
+			print(Fore.CYAN + 'Would you like to see a different year and month?')
 					
 			startCalendar()
 			
-
+#Initialize program	
 	run()	
+	
+	
 except ValueError:
     print("You have some mistake of userinput Value!")
 except TypeError:

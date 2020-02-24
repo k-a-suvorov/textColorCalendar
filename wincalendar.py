@@ -1,9 +1,15 @@
+#Import standart modules
+
 import datetime
 import calendar
 import os
+
+#prepare to work with the colors of windows console
 from ctypes import *
 windll.Kernel32.GetStdHandle.restype = c_ulong
 h = windll.Kernel32.GetStdHandle(c_ulong(0xfffffff5))
+
+#functions of color text in to the Windows console
 
 def color(c): #setconsoletextcolor
 	windll.Kernel32.SetConsoleTextAttribute(h,c)
@@ -15,51 +21,55 @@ def colorLine(c, s): #Win color text
 	print(" " + s)
 	print("*" * (len(s) +2))
 
-
+# main program
 try:
 	now = datetime.datetime.now()
-	c = calendar.TextCalendar(calendar.MONDAY)
+	c = calendar.TextCalendar(calendar.MONDAY) #Set first day as Monday
 	n = ''
 
 
+#Fantion of starting Program
 	def run():
 		startCalendar()
 
 
+#Fantion of starting Calendar
 	def startCalendar():
 		switch = True
 		color(11)
-		start = int(input('Наберите \"1\" Чтобы использовать Календарь.\n \"2\" - для выхода из программы: '))
+		start = int(input('Type \" 1\" To use the Calendar.\n \ " 2\" - to exit the program:'))
 		if (start < 1 or start > 2):
 			run()
 		elif (start == 2):
-			colorLine(12, 'До свидания!')
+			colorLine(12, 'Goodbye!')
 			switch = False
 		elif (start == 1):
 			os.system("cls")
 			calendarick()		
 
-		
+
+#Main cycle of Calendar		
 	def calendarick():
 		color(14)	
-		h = int(input('Введите год, начиная с нулевого Н.Э.: '))
-		n = int(input('Введите номер месяца: '))
+		h = int(input('Enter the year starting from zero N. E.:'))
+		n = int(input('Enter the month number:'))
 		if ((h < 0) and (n < 0 or n > 12)):
-			colorLine(12, 'В программе год должен начинаться с нулевого Нашей Эры!')
+			colorLine(12, 'In the program, the year should start from zero Ad!')
 			run()
 		else:	
 			month = c.formatmonth(h, n)
-			colorLine(13, 'Текущее время: \n')
+			colorLine(13, 'Current time: \n')
 			colorLine(2, now.strftime("%d-%m-%Y"))
 			print("\n")
 			color(14)
 			print(month)
 			color(11)
-			print('Желаете посмотреть другой год и месяц?')
+			print('Would you like to see a different year and month?')
 			
 			startCalendar()
 			os.system("cls")
-			
+
+#Initialize program			
 	run()	
 except ValueError:
     print("You have some mistake of userinput Value!")

@@ -1,8 +1,13 @@
+# Import standart modules
+
 import os
 import sys
 
+# main cycle
 try:
 	switch = True
+	
+	#detect unix-like or windows-like system
 	if (os.name == 'posix'):
 		os.system('python3 lincalendar.py')
 	elif (os.name == 'nt'):
